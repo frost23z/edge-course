@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Items{% endblock %}
+
+{% block extra_head %}
+<style>
+.item-list-container {
+    max-width: 700px;
+    margin: 2.5em auto;
+    padding: 2.5em 2em;
+    background: linear-gradient(135deg, #f8fafc 80%, #e9ecef 100%);
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.item-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.2em;
+}
+.item-list-title {
+    margin: 0;
+    font-size: 2em;
+    font-weight: 700;
+    color: #22223b;
+}
+.item-list-create {
+    padding: 0.6em 1.5em;
+    background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1em;
+    box-shadow: 0 2px 8px rgba(0,123,255,0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.item-list-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.item-list-li {
+    background: #fff;
+    margin-bottom: 1.3em;
+    padding: 1.3em 1.1em;
+    border-radius: 9px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+    border-left: 4px solid #007bff;
+    position: relative;
+    cursor: pointer;
+}
+.item-list-li:hover {
+    box-shadow: 0 6px 24px rgba(0,123,255,0.10);
+    transform: translateY(-2px) scale(1.01);
+    border-left-color: #0056b3;
+}
+.item-list-link {
+    font-weight: 700;
+    color: #22223b;
+    text-decoration: none;
+    font-size: 1.15em;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+}
+.item-list-edit {
+    margin-right: 0.9em;
+    color: #ffb300;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1em;
+    transition: color 0.2s;
+}
+.item-list-delete {
+    color: #e63946;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1em;
+    transition: color 0.2s;
+}
+.item-list-empty {
+    text-align: center;
+    color: #adb5bd;
+    padding: 2.5em 0;
+    font-size: 1.15em;
+    background: #fff;
+    border-radius: 9px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.item-list-empty-link {
+    color: #007bff;
+    text-decoration: underline;
+    font-weight: 500;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="item-list-container">
+    <div class="item-list-header">
+        <h2 class="item-list-title">Items</h2>
+        <a href="{% url 'item_create' %}" class="item-list-create">+ Create New</a>
+    </div>
+    <ul class="item-list-ul">
+        {% for item in items %}
+            <li class="item-list-li">
+                <div>
+                    <a href="{% url 'item_detail' item.id %}" class="item-list-link">{{ item.name }}</a>
+                </div>
+                <div>
+                    <a href="{% url 'item_update' item.id %}" class="item-list-edit">Edit</a>
+                    <a href="{% url 'item_delete' item.id %}" class="item-list-delete">Delete</a>
+                </div>
+            </li>
+        {% empty %}
+            <li class="item-list-empty">
+                <span style="display: inline-block; margin-bottom: 0.5em; font-size: 2.2em;">🗒️</span><br>
+                No items found.<br>
+                <a href="{% url 'item_create' %}" class="item-list-empty-link">Create your first item</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

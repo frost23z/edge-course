@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Default Page Title{% endblock %}</title>
+    {% block extra_head %}
+    {% endblock %}
 </head>
 <body>
     {% include "header.html" %}

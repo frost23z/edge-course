@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block extra_head %}
+<style>
+.item-detail-container {
+    max-width: 520px;
+    margin: 2.5em auto;
+    background: #fff;
+    padding: 2.5em 2em;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.item-detail-title {
+    margin-bottom: 0.7em;
+    font-size: 1.7em;
+    font-weight: 700;
+    color: #22223b;
+}
+.item-detail-desc {
+    margin-bottom: 1.2em;
+    color: #343a40;
+}
+.item-detail-meta {
+    color: #888;
+    font-size: 0.98em;
+    margin-bottom: 2.2em;
+}
+.item-detail-actions {
+    display: flex;
+    gap: 1em;
+}
+.item-detail-edit {
+    padding: 0.5em 1.2em;
+    background: #ffecb3;
+    color: #b28704;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+}
+.item-detail-delete {
+    padding: 0.5em 1.2em;
+    background: #ffe5e9;
+    color: #e63946;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+}
+.item-detail-back {
+    padding: 0.5em 1.2em;
+    background: #e7f1ff;
+    color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="item-detail-container">
+    <h2 class="item-detail-title">{{ item.name }}</h2>
+    <p class="item-detail-desc">{{ item.description }}</p>
+    <p class="item-detail-meta">Created at: {{ item.created_at }}</p>
+    <div class="item-detail-actions">
+        <a href="{% url 'item_update' item.id %}" class="item-detail-edit">Edit</a>
+        <a href="{% url 'item_delete' item.id %}" class="item-detail-delete">Delete</a>
+        <a href="{% url 'item_list' %}" class="item-detail-back">Back to list</a>
+    </div>
+</div>
+{% endblock %}
