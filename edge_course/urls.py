@@ -17,8 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from edge_course import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('basics/', include('basics.urls')),
     path('crud/', include('crud.urls')),
+    path('categories/', include('categories.urls')),
+    path('product/', include('product.urls')),
+    path('', views.home, name='home'),
 ]
