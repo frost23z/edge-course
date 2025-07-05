@@ -1,9 +1,10 @@
 from django.urls import path
+
 from . import views
 
 app_name = 'basic_render'
 
 urlpatterns = [
-    path('http/', views.index, name='index'),
-    path('html/', views.html, name='html'),
+    path('http/', views.http, name='http'),
+    path('template/', views.template, name='template'),
 ]
